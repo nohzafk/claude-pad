@@ -81,7 +81,7 @@ config.keys = {
           'fish',
           '-l',
           '-C',
-          'cd ~/projects/claude-pad && rlwrap lua claude-pad.lua $(wezterm cli list --format json | jq -r '.[0].pane_id')',
+          'cd ~/claude-pad && rlwrap lua claude-pad.lua $(wezterm cli list --format json | jq -r '.[0].pane_id')',
         },
       },
     }),
@@ -96,7 +96,7 @@ return config
 - **Fish** (recommended): Use `'fish', '-l', '-C', '...'` (as shown above)
 - **Zsh/Bash**: Change to `'zsh', '-c', '...'` or `'bash', '-c', '...'`
 
-**Adjust the path** `~/projects/claude-pad` if you installed ClaudePad elsewhere.
+**Adjust the path** `~/claude-pad` if you installed ClaudePad elsewhere.
 
 Press `Cmd+K` when Claude is running to spawn ClaudePad in a split pane
 
