@@ -117,10 +117,10 @@ local function print_instructions(instructions)
     print("  (none)")
   else
     for i, v in ipairs(instructions) do
-      -- Truncate long instructions for display
-      local display = v
-      if #display > 55 then
-        display = display:sub(1, 52) .. "..."
+      -- Replace newlines with spaces and show only first 50 chars on one line
+      local display = v:gsub("\n", " ")
+      if #display > 50 then
+        display = display:sub(1, 50) .. "..."
       end
       print(string.format("  [%d] %s", i, display))
     end
