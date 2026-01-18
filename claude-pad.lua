@@ -249,9 +249,22 @@ local function main()
         save_instructions(instructions)
       end
 
-    -- Default: Save as new instruction
+    -- Default: Save as new instruction (with multi-line support)
     else
-      table.insert(instructions, input)
+      -- Enter multi-line mode to handle pasted content with multiple lines
+      local lines = {input}
+      io.write("... ")
+      while true do
+        local next_line = io.read()
+        if not next_line or next_line:match("^%s*$") then
+          -- Empty line or EOF ends multi-line input
+          break
+        end
+        table.insert(lines, next_line)
+        io.write("... ")
+      end
+      local full_input = table.concat(lines, "\n")
+      table.insert(instructions, full_input)
       save_instructions(instructions)
     end
 
