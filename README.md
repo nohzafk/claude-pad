@@ -73,18 +73,25 @@ config.keys = {
   {
     key = 'k',
     mods = 'CMD',
-    action = act.SplitPane({
-      direction = 'Down',
-      size = { Percent = 30 },
-      command = {
-        args = {
-          'fish',
-          '-l',
-          '-C',
-          'cd ~/claude-pad && rlwrap lua claude-pad.lua $(wezterm cli list --format json | jq -r '.[0].pane_id')',
-        },
-      },
-    }),
+    action = wezterm.action_callback(function(window, pane)
+      -- Capture the current pane ID BEFORE splitting
+      local target_pane_id = pane:pane_id()
+      window:perform_action(
+        act.SplitPane({
+          direction = 'Down',
+          size = { Percent = 30 },
+          command = {
+            args = {
+              'fish',
+              '-l',
+              '-C',
+              'cd ~/claude-pad && rlwrap lua claude-pad.lua ' .. target_pane_id,
+            },
+          },
+        }),
+        pane
+      )
+    end),
   },
 }
 
